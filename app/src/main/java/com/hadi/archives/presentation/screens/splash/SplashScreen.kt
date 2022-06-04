@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.hadi.archives.R
+import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.utils.advancedShadow
 
 @Composable
@@ -62,8 +63,7 @@ fun SplashScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .weight(2f)
-                .background(Color.Yellow),
+                .weight(2f),
             contentAlignment = Alignment.Center
         ) {
 
@@ -72,14 +72,15 @@ fun SplashScreen(
                     .fillMaxWidth()
                     .height(72.dp)
                     .padding(horizontal = 32.dp)
-                    .background(Color.Black)
                     .advancedShadow(
                         color = Color.Black,
                         alpha = 1f,
                         shadowBlurRadius = (0.0001f).dp,
                         offsetX = 8.dp,
                         offsetY = 8.dp
-                    ),
+                    )
+                    .background(BrutalYellow)
+                ,
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
@@ -87,7 +88,7 @@ fun SplashScreen(
                 Text(
                     text = "GET STARTED",
                     style = TextStyle(
-                        color = Color.White,
+                        color = Color.Black,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                     ),
