@@ -2,6 +2,8 @@ package com.hadi.archives.presentation.screens.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -20,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.hadi.archives.R
+import com.hadi.archives.presentation.navigation.Screen
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.utils.advancedShadow
 
@@ -70,16 +73,23 @@ fun SplashScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(72.dp)
+                    .height(60.dp)
                     .padding(horizontal = 32.dp)
                     .advancedShadow(
                         color = Color.Black,
                         alpha = 1f,
                         shadowBlurRadius = (0.0001f).dp,
-                        offsetX = 8.dp,
-                        offsetY = 8.dp
+                        offsetX = 6.dp,
+                        offsetY = 6.dp
                     )
                     .background(BrutalYellow)
+                    .border(
+                        width = 4.dp,
+                        color = Color.Black
+                    )
+                    .clickable(onClick = {
+                        navController.navigate(Screen.Welcome.route)
+                    })
                 ,
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
