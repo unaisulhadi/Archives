@@ -80,7 +80,7 @@ fun Slider(image: Int) {
                 offsetX = 6.dp,
                 offsetY = 6.dp
             )
-            .background(BrutalYellow)
+            .background(Color.Blue)
             .border(
                 width = 4.dp,
                 color = Color.Black
