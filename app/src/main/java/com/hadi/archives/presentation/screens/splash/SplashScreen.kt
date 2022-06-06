@@ -21,9 +21,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.hadi.archives.R
 import com.hadi.archives.presentation.components.BrutalBox
 import com.hadi.archives.presentation.navigation.Screen
+import com.hadi.archives.ui.theme.BrutalBlue
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.utils.advancedShadow
 
@@ -31,6 +33,8 @@ import com.hadi.archives.utils.advancedShadow
 fun SplashScreen(
     navController: NavController
 ) {
+
+    rememberSystemUiController().setStatusBarColor(Color.White)
 
     Column(
         modifier = Modifier.fillMaxSize(),

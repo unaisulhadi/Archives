@@ -8,3 +8,5 @@ val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
 val BrutalYellow = Color(0xFFFFF500)
+//val BrutalBlue = Color(0xFF9900FC)
+val BrutalBlue = Color(0xFF7846F3)

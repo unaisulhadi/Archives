@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalPagerApi::class)
-
 package com.hadi.archives.presentation.screens.welcome
 
 import androidx.compose.animation.*
@@ -29,10 +27,12 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.hadi.archives.data.model.Slider
 import com.hadi.archives.data.model.SliderData
 import com.hadi.archives.presentation.components.BrutalBox
 import com.hadi.archives.presentation.navigation.Screen
+import com.hadi.archives.ui.theme.BrutalBlue
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.utils.advancedShadow
 
@@ -41,6 +41,8 @@ import com.hadi.archives.utils.advancedShadow
 fun WelcomeScreen(
     navController: NavController
 ) {
+
+    rememberSystemUiController().setStatusBarColor(Color.White)
 
     val pagerState = rememberPagerState()
     val pages = SliderData.slides
@@ -75,7 +77,12 @@ fun WelcomeScreen(
                 totalDots = 3,
                 selectedIndex = pagerState.currentPage,
             )
-            FinishButton(pagerState, navController, pages.size - 1)
+            FinishButton(
+                pagerState,  pages.size - 1,
+                onFinishClick = {
+                    navController.navigate(Screen.Home.route)
+                }
+            )
 
         }
 
@@ -84,11 +91,12 @@ fun WelcomeScreen(
 
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun FinishButton(
     pagerState: PagerState,
-    navController: NavController,
-    maxPage: Int
+    maxPage: Int,
+    onFinishClick: () -> Unit
 ) {
     AnimatedVisibility(
         visible = pagerState.currentPage == maxPage,
@@ -114,6 +122,7 @@ fun FinishButton(
                 backgroundColor = BrutalYellow,
                 borderColor = Color.Black,
                 borderWidth = 4.dp,
+                onClick = onFinishClick,
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -207,7 +216,7 @@ fun DotsIndicator(
                     modifier = Modifier
                         .height(15.dp)
                         .width(30.dp)
-                        .background(Color.Black)
+                        .background(Color.Blue)
                         .border(
                             width = 2.dp,
                             color = Color.Black

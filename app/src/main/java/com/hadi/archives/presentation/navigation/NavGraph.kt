@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.hadi.archives.presentation.screens.home.HomeScreen
 import com.hadi.archives.presentation.screens.splash.SplashScreen
 import com.hadi.archives.presentation.screens.welcome.WelcomeScreen
 
@@ -23,7 +24,7 @@ fun SetupNavGraph(navController: NavHostController) {
         }
 
         composable(route = Screen.Home.route){
-            SplashScreen(navController = navController)
+            HomeScreen(navController = navController)
         }
 
         composable(route = Screen.Details.route){

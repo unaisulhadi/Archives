@@ -22,6 +22,29 @@ private val GoshaSans = FontFamily(
     )
 )
 
+private val MonumentExtended = FontFamily(
+    Font(
+        resId = R.font.monument_extended_ultrabold,
+        weight = FontWeight.Bold,
+        style = FontStyle.Normal
+    ),
+    Font(
+        resId = R.font.monument_extended_regular,
+        weight = FontWeight.Normal,
+        style = FontStyle.Normal
+    )
+)
+
+val MonumentTypography = Typography(
+
+    h3 = TextStyle(
+        fontFamily = MonumentExtended,
+        fontWeight = FontWeight.Bold,
+        fontSize = 30.sp,
+    )
+)
+
+
 val Typography = Typography(
 
     h3 = TextStyle(

@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,9 +20,11 @@ import com.hadi.archives.ui.theme.BrutalYellow
 fun BrutalBox(
     modifier: Modifier = Modifier,
     backgroundColor: Color = Color.Black,
+    cornerRadius: Dp = 0.dp,
     borderWidth: Dp = 0.dp,
     borderColor: Color = Color.Black,
     shadowColor: Color = Color.Black,
+    shadowCornerRadius: Dp = 0.dp,
     shadowBorderWidth: Dp = 0.dp,
     shadowBorderColor: Color = Color.Black,
     shadowAlpha: Float = 1f,
@@ -42,10 +45,19 @@ fun BrutalBox(
                     x = offsetX,
                     y = offsetY
                 )
-                .background(shadowColor)
+                .background(
+                    color = shadowColor,
+                    shape = RoundedCornerShape(shadowCornerRadius),
+                )
                 .border(
                     width = shadowBorderWidth,
-                    color = shadowBorderColor
+                    shape = RoundedCornerShape(shadowCornerRadius),
+                    //To remove Hairline Dp
+                    color = if (borderWidth == 0.dp) {
+                        Color.Transparent
+                    } else {
+                        shadowBorderColor
+                    },
                 )
                 .alpha(shadowAlpha)
         ) {
@@ -55,10 +67,19 @@ fun BrutalBox(
         //Content Layer
         Box(
             modifier = modifier
-                .background(backgroundColor)
+                .background(
+                    color = backgroundColor,
+                    shape = RoundedCornerShape(cornerRadius)
+                )
                 .border(
                     width = borderWidth,
-                    color = borderColor
+                    shape = RoundedCornerShape(cornerRadius),
+                    //To remove Hairline Dp
+                    color = if (borderWidth == 0.dp) {
+                        Color.Transparent
+                    } else {
+                        borderColor
+                    },
                 )
                 .clickable(
                     enabled = clickEnabled,
@@ -82,7 +103,11 @@ fun BrutalBoxPreview() {
                 .height(75.dp)
                 .padding(horizontal = 16.dp, vertical = 16.dp),
             backgroundColor = BrutalYellow,
-            shadowColor = Color.Blue,
+            borderWidth = 2.dp,
+            cornerRadius = 4.dp,
+            shadowCornerRadius = 4.dp,
+            shadowColor = Color.Black,
+            shadowBorderWidth = 2.dp,
             contentAlignment = Alignment.Center
         ) {
             Text(text = "Hello World")
