@@ -31,6 +31,7 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.hadi.archives.data.model.Slider
 import com.hadi.archives.data.model.SliderData
+import com.hadi.archives.presentation.components.BrutalBox
 import com.hadi.archives.presentation.navigation.Screen
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.utils.advancedShadow
@@ -74,7 +75,7 @@ fun WelcomeScreen(
                 totalDots = 3,
                 selectedIndex = pagerState.currentPage,
             )
-            FinishButton(pagerState, navController,pages.size-1)
+            FinishButton(pagerState, navController, pages.size - 1)
 
         }
 
@@ -90,8 +91,6 @@ fun FinishButton(
     maxPage: Int
 ) {
     AnimatedVisibility(
-        modifier = Modifier
-            .fillMaxWidth(),
         visible = pagerState.currentPage == maxPage,
         enter = fadeIn(
             animationSpec = tween(durationMillis = 500),
@@ -101,40 +100,32 @@ fun FinishButton(
             animationSpec = tween(durationMillis = 250)
         )
     ) {
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(75.dp)
-                .padding(top = 24.dp, start = 24.dp, end = 24.dp)
-                .advancedShadow(
-                    color = Color.Black,
-                    alpha = 1f,
-                    shadowBlurRadius = (0.0001f).dp,
-                    offsetX = 6.dp,
-                    offsetY = 6.dp
-                )
-                .background(BrutalYellow)
-                .border(
-                    width = 4.dp,
-                    color = Color.Black
-                )
-                .clickable(onClick = {
-                    navController.navigate(Screen.Welcome.route)
-                }),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            Text(
-                text = "EXPLORE",
-                style = TextStyle(
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                ),
-            )
-
+            BrutalBox(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp)
+                    .padding(horizontal = 32.dp, vertical = 16.dp),
+                backgroundColor = BrutalYellow,
+                borderColor = Color.Black,
+                borderWidth = 4.dp,
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "EXPLORE",
+                    style = MaterialTheme.typography.h6.copy(
+                        color = Color.Black
+                    ),
+                )
+            }
         }
+
+
     }
 }
 

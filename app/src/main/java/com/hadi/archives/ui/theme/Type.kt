@@ -12,7 +12,7 @@ import com.hadi.archives.R
 private val GoshaSans = FontFamily(
     Font(
         resId = R.font.gosha_sans_bold,
-        weight = FontWeight.Bold,
+        weight = FontWeight.SemiBold,
         style = FontStyle.Normal
     ),
     Font(
@@ -26,25 +26,25 @@ val Typography = Typography(
 
     h3 = TextStyle(
         fontFamily = GoshaSans,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 44.sp,
     ),
 
     h4 = TextStyle(
         fontFamily = GoshaSans,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 28.sp,
     ),
 
     h5 = TextStyle(
         fontFamily = GoshaSans,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
     ),
 
     h6 = TextStyle(
         fontFamily = GoshaSans,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp,
     ),
 

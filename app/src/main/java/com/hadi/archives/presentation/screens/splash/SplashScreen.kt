@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.hadi.archives.R
+import com.hadi.archives.presentation.components.BrutalBox
 import com.hadi.archives.presentation.navigation.Screen
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.utils.advancedShadow
@@ -48,19 +49,6 @@ fun SplashScreen(
                 painter = painterResource(id = R.drawable.ic_books),
                 contentDescription = stringResource(R.string.archives_logo)
             )
-
-//            Text(
-//                text = "GET STARTED",
-//                style = MaterialTheme.typography.h4.copy(
-//                    color = Color.Black,
-//                    shadow = Shadow(
-//                        color = Color.Yellow,
-//                        offset = Offset(4f, 4f),
-//                        blurRadius = 0.01f
-//                    )
-//                ),
-//            )
-
         }
 
         Box(
@@ -70,7 +58,28 @@ fun SplashScreen(
             contentAlignment = Alignment.Center
         ) {
 
-            Row(
+            BrutalBox(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp)
+                    .padding(horizontal = 32.dp, vertical = 16.dp),
+                backgroundColor = BrutalYellow,
+                borderColor = Color.Black,
+                borderWidth = 4.dp,
+                onClick = {
+                    navController.navigate(Screen.Welcome.route)
+                },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "GET STARTED",
+                    style = MaterialTheme.typography.h6.copy(
+                        color = Color.Black
+                    ),
+                )
+            }
+
+            /*Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp)
@@ -104,7 +113,7 @@ fun SplashScreen(
                     ),
                 )
 
-            }
+            }*/
 
         }
 
