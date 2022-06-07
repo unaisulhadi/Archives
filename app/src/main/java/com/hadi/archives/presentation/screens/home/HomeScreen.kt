@@ -2,11 +2,16 @@ package com.hadi.archives.presentation.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -25,6 +30,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.hadi.archives.R
+import com.hadi.archives.data.model.getRecommendedBooks
 import com.hadi.archives.presentation.components.BrutalBox
 import com.hadi.archives.ui.theme.BrutalBlue
 import com.hadi.archives.ui.theme.BrutalYellow
@@ -36,12 +42,17 @@ fun HomeScreen(
     navController: NavController = rememberNavController()
 ) {
 
+    val scrollState = rememberScrollState()
     rememberSystemUiController().setStatusBarColor(BrutalBlue)
     var search by remember {
         mutableStateOf("")
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .verticalScroll(scrollState)
+            .fillMaxSize(),
+    ) {
 
         Column(
             modifier = Modifier
@@ -91,7 +102,7 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(60.dp)
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 12.dp)
                 .offset(y = (-30).dp),
             backgroundColor = Color.White,
             borderColor = Color.Black,
@@ -118,7 +129,7 @@ fun HomeScreen(
                     )
                 }
 
-                Box(modifier = Modifier) {
+                Box() {
                     BasicTextField(
                         value = search,
                         onValueChange = {
@@ -151,14 +162,53 @@ fun HomeScreen(
 
                     }
                 }
-
-
-
             }
 
 
         }
 
+        Text(
+            modifier = Modifier.padding(start = 12.dp),
+            text = "Recommended For You",
+            style = MaterialTheme.typography.h6,
+        )
+
+        LazyRow(
+            contentPadding = PaddingValues(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            itemsIndexed(items = getRecommendedBooks()) { index, book ->
+                BookCard(index = index, book = book)
+            }
+        }
+
+        Text(
+            modifier = Modifier.padding(start = 12.dp),
+            text = "Best Sellers",
+            style = MaterialTheme.typography.h6,
+        )
+        LazyRow(
+            contentPadding = PaddingValues(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            itemsIndexed(items = getRecommendedBooks()) { index, book ->
+                BookCard(index = index, book = book)
+            }
+        }
+
+        Text(
+            modifier = Modifier.padding(start = 12.dp),
+            text = "Top Authors",
+            style = MaterialTheme.typography.h6,
+        )
+        LazyRow(
+            contentPadding = PaddingValues(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            itemsIndexed(items = getRecommendedBooks()) { index, book ->
+                BookCard(index = index, book = book)
+            }
+        }
     }
 
 }
