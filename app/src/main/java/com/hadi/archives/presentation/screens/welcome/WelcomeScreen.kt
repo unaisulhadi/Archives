@@ -122,6 +122,8 @@ fun FinishButton(
                 backgroundColor = BrutalYellow,
                 borderColor = Color.Black,
                 borderWidth = 4.dp,
+                cornerRadius = 4.dp,
+                shadowCornerRadius = 4.dp,
                 onClick = onFinishClick,
                 contentAlignment = Alignment.Center
             ) {
