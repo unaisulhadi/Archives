@@ -9,7 +9,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.hadi.archives.R
 
-private val GoshaSans = FontFamily(
+val GoshaSans = FontFamily(
     Font(
         resId = R.font.gosha_sans_bold,
         weight = FontWeight.SemiBold,
