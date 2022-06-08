@@ -36,11 +36,9 @@ import com.hadi.archives.data.local.getRecentRead
 import com.hadi.archives.data.local.getScienceFictions
 import com.hadi.archives.presentation.components.BrutalBox
 import com.hadi.archives.presentation.components.CircularProgressBar
-import com.hadi.archives.ui.theme.BrutalBlue
-import com.hadi.archives.ui.theme.BrutalYellow
-import com.hadi.archives.ui.theme.GoshaSans
-import com.hadi.archives.ui.theme.MonumentTypography
+import com.hadi.archives.ui.theme.*
 import com.hadi.archives.utils.advancedShadow
+import com.hadi.archives.utils.applyBrutalism
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
@@ -72,15 +70,26 @@ fun HomeScreen(
                 .background(BrutalBlue),
             horizontalAlignment = Alignment.End
         ) {
+//
+//            BrutalBox(
+//                modifier = Modifier
+//                    .padding(all = 12.dp)
+//                    .size(40.dp),
+//                backgroundColor = BrutalYellow,
+//                borderColor = Color.Black,
+//                borderWidth = 3.dp
+//            ) {
 
-            BrutalBox(
+            Box(
                 modifier = Modifier
                     .padding(all = 12.dp)
-                    .size(40.dp),
-                backgroundColor = BrutalYellow,
-                borderColor = Color.Black,
-                borderWidth = 3.dp
+                    .size(40.dp)
+                    .applyBrutalism(
+                        backgroundColor = BrutalYellow,
+                        borderWidth = 3.dp
+                    )
             ) {
+
                 IconButton(
                     onClick = {
 
@@ -127,23 +136,11 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .height(180.dp)
                     .padding(horizontal = 12.dp, vertical = 8.dp)
-                    .advancedShadow(
-                        color = Color.Black,
-                        alpha = 1f,
-                        cornersRadius = 8.dp,
-                        shadowBlurRadius = (0.0001f).dp,
-                        offsetX = 4.dp,
-                        offsetY = 4.dp
+                    .applyBrutalism(
+                        backgroundColor = BrutalYellow,
+                        borderWidth = 3.dp,
+                        cornersRadius = 6.dp
                     )
-                    .background(
-                        Color.White,
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                    .border(
-                        width = 4.dp,
-                        color = Color.Black,
-                        shape = RoundedCornerShape(8.dp)
-                    ),
             ) {
 
                 Row(
@@ -194,16 +191,15 @@ fun HomeScreen(
                             maxLines = 2
                         )
 
-                        BrutalBox(
+                        Box(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(50.dp)
-                                .padding(bottom = 4.dp, end = 4.dp),
-                            backgroundColor = BrutalBlue,
-                            borderWidth = 3.dp,
-                            cornerRadius = 4.dp,
-                            shadowCornerRadius = 4.dp,
-                            contentAlignment = Alignment.Center
+                                .padding(bottom = 4.dp, end = 4.dp)
+                                .applyBrutalism(
+                                    backgroundColor = BrutalBlue,
+                                    borderWidth = 3.dp
+                                )
                         ) {
                             Row(
                                 modifier = Modifier.fillMaxSize(),
@@ -276,16 +272,16 @@ fun SearchBox() {
     }
 
 
-    BrutalBox(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)
-            .padding(horizontal = 12.dp),
-        backgroundColor = Color.White,
-        borderColor = Color.Black,
-        borderWidth = 4.dp,
-        cornerRadius = 6.dp,
-        shadowCornerRadius = 6.dp,
+            .padding(horizontal = 12.dp)
+            .applyBrutalism(
+                backgroundColor = BrutalPink,
+                borderWidth = 3.dp,
+                cornersRadius = 6.dp
+            ),
         contentAlignment = Alignment.CenterStart,
     ) {
 

@@ -35,6 +35,7 @@ import com.hadi.archives.presentation.navigation.Screen
 import com.hadi.archives.ui.theme.BrutalBlue
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.utils.advancedShadow
+import com.hadi.archives.utils.applyBrutalism
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -78,7 +79,7 @@ fun WelcomeScreen(
                 selectedIndex = pagerState.currentPage,
             )
             FinishButton(
-                pagerState,  pages.size - 1,
+                pagerState, pages.size - 1,
                 onFinishClick = {
                     navController.navigate(Screen.Home.route)
                 }
@@ -114,17 +115,18 @@ fun FinishButton(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BrutalBox(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(80.dp)
-                    .padding(horizontal = 32.dp, vertical = 16.dp),
-                backgroundColor = BrutalYellow,
-                borderColor = Color.Black,
-                borderWidth = 4.dp,
-                cornerRadius = 4.dp,
-                shadowCornerRadius = 4.dp,
-                onClick = onFinishClick,
+                    .padding(horizontal = 32.dp, vertical = 16.dp)
+                    .applyBrutalism(
+                        backgroundColor = BrutalYellow,
+                        borderWidth = 3.dp
+                    )
+                    .clickable(
+                        onClick = onFinishClick,
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -155,17 +157,9 @@ fun Slider(slide: Slider) {
                 .fillMaxWidth()
                 .height(400.dp)
                 .padding(32.dp)
-                .advancedShadow(
-                    color = Color.Black,
-                    alpha = 1f,
-                    shadowBlurRadius = (0.0001f).dp,
-                    offsetX = 6.dp,
-                    offsetY = 6.dp
-                )
-                .background(Color.Blue)
-                .border(
-                    width = 4.dp,
-                    color = Color.Black
+                .applyBrutalism(
+                    backgroundColor = BrutalYellow,
+                    borderWidth = 3.dp
                 ),
             contentAlignment = Alignment.Center
         ) {

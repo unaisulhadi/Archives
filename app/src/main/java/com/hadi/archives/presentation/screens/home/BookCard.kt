@@ -19,22 +19,24 @@ import coil.compose.rememberImagePainter
 import com.hadi.archives.R
 import com.hadi.archives.data.model.Book
 import com.hadi.archives.presentation.components.BrutalBox
+import com.hadi.archives.ui.theme.BrutalBlue
 import com.hadi.archives.ui.theme.BrutalYellow
+import com.hadi.archives.utils.applyBrutalism
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun BookCard(index: Int, book: Book) {
 
-    BrutalBox(
+    Box(
         modifier = Modifier
             .width(160.dp)
             .height(240.dp)
-            .padding(start = 4.dp, end = 4.dp),
-        backgroundColor = BrutalYellow,
-        borderWidth = 3.dp,
-        cornerRadius = 6.dp,
-        shadowBorderWidth = 3.dp,
-        shadowCornerRadius = 6.dp
+            .padding(start = 4.dp, end = 4.dp)
+            .applyBrutalism(
+                backgroundColor = BrutalBlue,
+                borderWidth = 3.dp,
+                cornersRadius = 6.dp
+            ),
     ) {
 
         val painter = rememberImagePainter(data = book.imageUrl) {

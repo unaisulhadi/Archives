@@ -29,6 +29,7 @@ import com.hadi.archives.ui.theme.BrutalBlue
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.ui.theme.MonumentTypography
 import com.hadi.archives.utils.advancedShadow
+import com.hadi.archives.utils.applyBrutalism
 
 @Composable
 fun SplashScreen(
@@ -64,19 +65,18 @@ fun SplashScreen(
             contentAlignment = Alignment.Center
         ) {
 
-            BrutalBox(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(80.dp)
-                    .padding(horizontal = 32.dp, vertical = 16.dp),
-                backgroundColor = BrutalYellow,
-                borderColor = Color.Black,
-                borderWidth = 4.dp,
-                cornerRadius = 4.dp,
-                shadowCornerRadius = 4.dp,
-                onClick = {
-                    navController.navigate(Screen.Welcome.route)
-                },
+                    .padding(horizontal = 32.dp, vertical = 16.dp).applyBrutalism(
+                        backgroundColor = BrutalYellow,
+                        borderWidth = 3.dp,
+                    ).clickable(
+                        onClick = {
+                            navController.navigate(Screen.Welcome.route)
+                        },
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
