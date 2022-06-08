@@ -28,7 +28,7 @@ fun BookCard(index: Int, book: Book) {
     BrutalBox(
         modifier = Modifier
             .width(160.dp)
-            .height(200.dp)
+            .height(240.dp)
             .padding(start = 4.dp, end = 4.dp),
         backgroundColor = BrutalYellow,
         borderWidth = 3.dp,
@@ -37,7 +37,7 @@ fun BookCard(index: Int, book: Book) {
         shadowCornerRadius = 6.dp
     ) {
 
-        val painter = rememberImagePainter(data = book.thumbnailUrl) {
+        val painter = rememberImagePainter(data = book.imageUrl) {
             placeholder(R.drawable.ic_book_placeholder)
             error(R.drawable.ic_book_placeholder)
         }
@@ -48,37 +48,13 @@ fun BookCard(index: Int, book: Book) {
 
             Image(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(140.dp)
+                    .fillMaxSize()
                     .clip(
-                        RoundedCornerShape(
-                            topStart = 6.dp,
-                            topEnd = 6.dp,
-                            bottomEnd = 0.dp,
-                            bottomStart = 0.dp
-                        )
+                        RoundedCornerShape(6.dp)
                     ),
                 painter = painter,
                 contentScale = ContentScale.Crop,
                 contentDescription = "Book Thumbnail"
-            )
-//            Divider(
-//                modifier = Modifier
-//                    .height(4.dp)
-//                    .background(Color.Black)
-//            )
-            Text(
-                modifier = Modifier.padding(top = 4.dp, start = 6.dp, end = 6.dp),
-                text = book.title,
-                maxLines = 1,
-                style = MaterialTheme.typography.subtitle1,
-                overflow = TextOverflow.Ellipsis
-            )
-            Text(
-                modifier = Modifier.padding(vertical = 4.dp, horizontal = 6.dp),
-                text = book.authors.getOrElse(0) { "-" },
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
             )
 
         }

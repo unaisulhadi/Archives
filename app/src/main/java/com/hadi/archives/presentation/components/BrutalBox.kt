@@ -107,7 +107,6 @@ fun BrutalBoxPreview() {
             cornerRadius = 4.dp,
             shadowCornerRadius = 4.dp,
             shadowColor = Color.Black,
-            shadowBorderWidth = 2.dp,
             contentAlignment = Alignment.Center
         ) {
             Text(text = "Hello World")

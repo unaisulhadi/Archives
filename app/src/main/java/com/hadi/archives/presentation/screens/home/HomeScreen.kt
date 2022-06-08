@@ -1,10 +1,12 @@
 package com.hadi.archives.presentation.screens.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -30,12 +32,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.hadi.archives.R
-import com.hadi.archives.data.model.getRecommendedBooks
+import com.hadi.archives.data.local.getManagementBooks
+import com.hadi.archives.data.local.getScienceFictions
 import com.hadi.archives.presentation.components.BrutalBox
 import com.hadi.archives.ui.theme.BrutalBlue
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.ui.theme.GoshaSans
 import com.hadi.archives.ui.theme.MonumentTypography
+import com.hadi.archives.utils.advancedShadow
 
 @Composable
 fun HomeScreen(
@@ -44,9 +48,7 @@ fun HomeScreen(
 
     val scrollState = rememberScrollState()
     rememberSystemUiController().setStatusBarColor(BrutalBlue)
-    var search by remember {
-        mutableStateOf("")
-    }
+
 
     Column(
         modifier = Modifier
@@ -98,74 +100,52 @@ fun HomeScreen(
 
         }
 
-        BrutalBox(
+        SearchBox()
+
+        Text(
+            modifier = Modifier.padding(start = 12.dp),
+            text = "Continue Reading",
+            style = MaterialTheme.typography.h6,
+        )
+
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(60.dp)
-                .padding(horizontal = 12.dp)
-                .offset(y = (-30).dp),
-            backgroundColor = Color.White,
-            borderColor = Color.Black,
-            borderWidth = 4.dp,
-            cornerRadius = 6.dp,
-            shadowCornerRadius = 6.dp,
-            contentAlignment = Alignment.CenterStart,
+                .height(200.dp)
+                .padding(horizontal = 12.dp, vertical = 8.dp)
+                .advancedShadow(
+                    color = Color.Black,
+                    alpha = 1f,
+                    cornersRadius = 8.dp,
+                    shadowBlurRadius = (0.0001f).dp,
+                    offsetX = 4.dp,
+                    offsetY = 4.dp
+                )
+                .background(
+                    Color.White,
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .border(
+                    width = 4.dp,
+                    color = Color.Black,
+                    shape = RoundedCornerShape(8.dp)
+                ),
         ) {
 
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                IconButton(
-                    onClick = { },
-                ) {
-                    Icon(
-                        modifier = Modifier
-                            .size(36.dp)
-                            .padding(start = 6.dp),
-                        imageVector = Icons.Filled.Search,
-                        contentDescription = "Search"
-                    )
-                }
-
-                Box() {
-                    BasicTextField(
-                        value = search,
-                        onValueChange = {
-                            search = it
-                        },
-                        maxLines = 1,
-                        singleLine = true,
-                        textStyle = TextStyle(
-                            color = Color.Black,
-                            fontFamily = GoshaSans,
-                            fontSize = 18.sp
-                        ),
-                        modifier = Modifier.fillMaxWidth(),
-                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                //keyboardController?.hide()
-                            }
-                        )
-                    )
-                    if (search.isEmpty()) {
-
-                        Text(
-                            text = "Search books...",
-                            color = Color.Black,
-                            fontFamily = GoshaSans,
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Start
-                        )
-
-                    }
-                }
-            }
-
-
         }
+
+//        BrutalBox(
+//            modifier= Modifier
+//                .fillMaxWidth()
+//                .height(200.dp)
+//                .padding(horizontal = 12.dp, vertical = 8.dp),
+//            backgroundColor = Color.White,
+//            borderWidth = 3.dp,
+//            cornerRadius = 6.dp,
+//            shadowCornerRadius = 6.dp
+//        ) {
+//
+//        }
 
         Text(
             modifier = Modifier.padding(start = 12.dp),
@@ -177,7 +157,7 @@ fun HomeScreen(
             contentPadding = PaddingValues(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            itemsIndexed(items = getRecommendedBooks()) { index, book ->
+            itemsIndexed(items = getScienceFictions()) { index, book ->
                 BookCard(index = index, book = book)
             }
         }
@@ -191,27 +171,93 @@ fun HomeScreen(
             contentPadding = PaddingValues(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            itemsIndexed(items = getRecommendedBooks()) { index, book ->
+            itemsIndexed(items = getManagementBooks()) { index, book ->
                 BookCard(index = index, book = book)
             }
         }
 
-        Text(
-            modifier = Modifier.padding(start = 12.dp),
-            text = "Top Authors",
-            style = MaterialTheme.typography.h6,
-        )
-        LazyRow(
-            contentPadding = PaddingValues(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            itemsIndexed(items = getRecommendedBooks()) { index, book ->
-                BookCard(index = index, book = book)
-            }
-        }
     }
 
 }
+
+
+@Composable
+fun SearchBox() {
+    var search by remember {
+        mutableStateOf("")
+    }
+
+
+    BrutalBox(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp)
+            .padding(horizontal = 12.dp)
+            .offset(y = (-30).dp),
+        backgroundColor = Color.White,
+        borderColor = Color.Black,
+        borderWidth = 4.dp,
+        cornerRadius = 6.dp,
+        shadowCornerRadius = 6.dp,
+        contentAlignment = Alignment.CenterStart,
+    ) {
+
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            IconButton(
+                onClick = { },
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .padding(start = 6.dp),
+                    imageVector = Icons.Filled.Search,
+                    contentDescription = "Search"
+                )
+            }
+
+            Box() {
+                BasicTextField(
+                    value = search,
+                    onValueChange = {
+                        search = it
+                    },
+                    maxLines = 1,
+                    singleLine = true,
+                    textStyle = TextStyle(
+                        color = Color.Black,
+                        fontFamily = GoshaSans,
+                        fontSize = 18.sp
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            //keyboardController?.hide()
+                        }
+                    )
+                )
+                if (search.isEmpty()) {
+
+                    Text(
+                        text = "Search books...",
+                        color = Color.Black,
+                        fontFamily = GoshaSans,
+                        fontSize = 18.sp,
+                        textAlign = TextAlign.Start
+                    )
+
+                }
+            }
+        }
+
+
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
