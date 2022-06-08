@@ -72,18 +72,17 @@ fun HomeScreen(
             Box(
                 modifier = Modifier
                     .padding(all = 12.dp)
-                    .size(40.dp)
+                    .size(50.dp)
                     .applyBrutalism(
                         backgroundColor = BrutalYellow,
                         borderWidth = 3.dp,
-                        cornersRadius = 0.dp
                     ),
                 contentAlignment = Alignment.Center
             ) {
 
                 Icon(
                     modifier = Modifier
-                        .size(36.dp)
+                        .size(32.dp)
                         .padding(all = 6.dp),
                     painter = painterResource(id = R.drawable.ic_notification),
                     contentDescription = "Notifications"
@@ -218,8 +217,10 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 itemsIndexed(items = getScienceFictions()) { index, book ->
-                    BookCard(book = book){
-                        navController.navigate(Screen.Details.route)
+                    BookCard(book = book) {
+                        navController.navigate(
+                            route = Screen.Details.route.plus("/${book.id}")
+                        )
                     }
                 }
             }
@@ -234,7 +235,7 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 itemsIndexed(items = getManagementBooks()) { index, book ->
-                    BookCard(book = book){
+                    BookCard(book = book) {
                         navController.navigate(Screen.Details.route)
                     }
                 }

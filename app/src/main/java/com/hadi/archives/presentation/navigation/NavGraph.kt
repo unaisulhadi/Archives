@@ -28,8 +28,9 @@ fun SetupNavGraph(navController: NavHostController) {
             HomeScreen(navController = navController)
         }
 
-        composable(route = Screen.Details.route){
-            BookDetailsScreen(navController = navController)
+        composable(route = Screen.Details.route.plus("/{bookId}")){
+            val bookId = it.arguments?.getString("bookId") ?: ""
+            BookDetailsScreen(navController = navController, bookId = bookId)
         }
 
     }
