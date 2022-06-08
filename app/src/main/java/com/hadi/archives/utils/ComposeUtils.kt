@@ -1,5 +1,6 @@
 package com.hadi.archives.utils
 
+import androidx.compose.foundation.background
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
@@ -41,4 +42,16 @@ fun Modifier.advancedShadow(
             paint
         )
     }
+}
+
+
+fun Modifier.applyBrutalism(
+    color: Color = Color.Black,
+    alpha: Float = 0f,
+    cornersRadius: Dp = 0.dp,
+    shadowBlurRadius: Dp = 0.dp,
+    offsetY: Dp = 0.dp,
+    offsetX: Dp = 0.dp
+){
+
 }
