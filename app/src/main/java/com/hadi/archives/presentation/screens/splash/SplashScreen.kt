@@ -28,7 +28,6 @@ import com.hadi.archives.presentation.navigation.Screen
 import com.hadi.archives.ui.theme.BrutalBlue
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.ui.theme.MonumentTypography
-import com.hadi.archives.utils.advancedShadow
 import com.hadi.archives.utils.applyBrutalism
 
 @Composable

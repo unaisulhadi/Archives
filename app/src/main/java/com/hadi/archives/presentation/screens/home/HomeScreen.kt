@@ -21,7 +21,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,10 +33,9 @@ import com.hadi.archives.R
 import com.hadi.archives.data.local.getManagementBooks
 import com.hadi.archives.data.local.getRecentRead
 import com.hadi.archives.data.local.getScienceFictions
-import com.hadi.archives.presentation.components.BrutalBox
 import com.hadi.archives.presentation.components.CircularProgressBar
+import com.hadi.archives.presentation.navigation.Screen
 import com.hadi.archives.ui.theme.*
-import com.hadi.archives.utils.advancedShadow
 import com.hadi.archives.utils.applyBrutalism
 
 @OptIn(ExperimentalCoilApi::class)
@@ -70,15 +68,6 @@ fun HomeScreen(
                 .background(BrutalBlue),
             horizontalAlignment = Alignment.End
         ) {
-//
-//            BrutalBox(
-//                modifier = Modifier
-//                    .padding(all = 12.dp)
-//                    .size(40.dp),
-//                backgroundColor = BrutalYellow,
-//                borderColor = Color.Black,
-//                borderWidth = 3.dp
-//            ) {
 
             Box(
                 modifier = Modifier
@@ -86,23 +75,19 @@ fun HomeScreen(
                     .size(40.dp)
                     .applyBrutalism(
                         backgroundColor = BrutalYellow,
-                        borderWidth = 3.dp
-                    )
+                        borderWidth = 3.dp,
+                        cornersRadius = 0.dp
+                    ),
+                contentAlignment = Alignment.Center
             ) {
 
-                IconButton(
-                    onClick = {
-
-                    },
-                ) {
-                    Icon(
-                        modifier = Modifier
-                            .size(36.dp)
-                            .padding(all = 6.dp),
-                        painter = painterResource(id = R.drawable.ic_notification),
-                        contentDescription = "Notifications"
-                    )
-                }
+                Icon(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .padding(all = 6.dp),
+                    painter = painterResource(id = R.drawable.ic_notification),
+                    contentDescription = "Notifications"
+                )
             }
 
 
@@ -151,15 +136,7 @@ fun HomeScreen(
                     Image(
                         modifier = Modifier
                             .fillMaxHeight()
-                            .width(120.dp)
-                            .clip(
-                                shape = RoundedCornerShape(
-                                    topStart = 8.dp,
-                                    topEnd = 0.dp,
-                                    bottomStart = 8.dp,
-                                    bottomEnd = 0.dp
-                                )
-                            ),
+                            .width(120.dp),
                         painter = painter,
                         contentScale = ContentScale.Crop,
                         contentDescription = "Continue Reading"
@@ -241,7 +218,9 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 itemsIndexed(items = getScienceFictions()) { index, book ->
-                    BookCard(index = index, book = book)
+                    BookCard(book = book){
+                        navController.navigate(Screen.Details.route)
+                    }
                 }
             }
 
@@ -255,7 +234,9 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 itemsIndexed(items = getManagementBooks()) { index, book ->
-                    BookCard(index = index, book = book)
+                    BookCard(book = book){
+                        navController.navigate(Screen.Details.route)
+                    }
                 }
             }
         }

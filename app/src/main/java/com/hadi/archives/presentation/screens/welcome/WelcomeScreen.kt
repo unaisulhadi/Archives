@@ -34,7 +34,6 @@ import com.hadi.archives.presentation.components.BrutalBox
 import com.hadi.archives.presentation.navigation.Screen
 import com.hadi.archives.ui.theme.BrutalBlue
 import com.hadi.archives.ui.theme.BrutalYellow
-import com.hadi.archives.utils.advancedShadow
 import com.hadi.archives.utils.applyBrutalism
 
 @OptIn(ExperimentalPagerApi::class)

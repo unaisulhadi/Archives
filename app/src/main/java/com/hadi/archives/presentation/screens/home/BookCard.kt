@@ -2,6 +2,7 @@ package com.hadi.archives.presentation.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
@@ -25,7 +26,7 @@ import com.hadi.archives.utils.applyBrutalism
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun BookCard(index: Int, book: Book) {
+fun BookCard(book: Book, onBookSelected: (Book) -> Unit) {
 
     Box(
         modifier = Modifier
@@ -36,6 +37,9 @@ fun BookCard(index: Int, book: Book) {
                 backgroundColor = BrutalBlue,
                 borderWidth = 3.dp,
                 cornersRadius = 6.dp
+            )
+            .clickable(
+                onClick = { onBookSelected(book) }
             ),
     ) {
 
@@ -50,10 +54,7 @@ fun BookCard(index: Int, book: Book) {
 
             Image(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .clip(
-                        RoundedCornerShape(6.dp)
-                    ),
+                    .fillMaxSize(),
                 painter = painter,
                 contentScale = ContentScale.Crop,
                 contentDescription = "Book Thumbnail"
