@@ -35,6 +35,7 @@ import com.hadi.archives.data.local.getManagementBooks
 import com.hadi.archives.data.local.getRecentRead
 import com.hadi.archives.data.local.getScienceFictions
 import com.hadi.archives.presentation.components.BrutalBox
+import com.hadi.archives.presentation.components.CircularProgressBar
 import com.hadi.archives.ui.theme.BrutalBlue
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.ui.theme.GoshaSans
@@ -108,136 +109,158 @@ fun HomeScreen(
 
         }
 
-        SearchBox()
-
-        Text(
-            modifier = Modifier.padding(start = 12.dp),
-            text = "Continue Reading",
-            style = MaterialTheme.typography.h6,
-        )
-
-        Box(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp)
-                .padding(horizontal = 12.dp, vertical = 8.dp)
-                .advancedShadow(
-                    color = Color.Black,
-                    alpha = 1f,
-                    cornersRadius = 8.dp,
-                    shadowBlurRadius = (0.0001f).dp,
-                    offsetX = 4.dp,
-                    offsetY = 4.dp
-                )
-                .background(
-                    Color.White,
-                    shape = RoundedCornerShape(8.dp)
-                )
-                .border(
-                    width = 4.dp,
-                    color = Color.Black,
-                    shape = RoundedCornerShape(8.dp)
-                ),
+                .fillMaxSize()
+                .offset(y = (-30).dp)
         ) {
+            SearchBox()
 
-            Row(
+            Text(
+                modifier = Modifier.padding(start = 12.dp, top = 8.dp, end = 12.dp),
+                text = "Continue Reading",
+                style = MaterialTheme.typography.h6,
+            )
+
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .height(180.dp)
+                    .padding(horizontal = 12.dp, vertical = 8.dp)
+                    .advancedShadow(
+                        color = Color.Black,
+                        alpha = 1f,
+                        cornersRadius = 8.dp,
+                        shadowBlurRadius = (0.0001f).dp,
+                        offsetX = 4.dp,
+                        offsetY = 4.dp
+                    )
+                    .background(
+                        Color.White,
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .border(
+                        width = 4.dp,
+                        color = Color.Black,
+                        shape = RoundedCornerShape(8.dp)
+                    ),
             ) {
 
-                Image(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(120.dp)
-                        .clip(
-                            shape = RoundedCornerShape(
-                                topStart = 8.dp,
-                                topEnd = 0.dp,
-                                bottomStart = 8.dp,
-                                bottomEnd = 0.dp
-                            )
-                        ),
-                    painter = painter,
-                    contentScale = ContentScale.Crop,
-                    contentDescription = "Continue Reading"
-                )
-
-                Divider(modifier = Modifier
-                    .fillMaxHeight()
-                    .width(4.dp)
-                    .background(Color.Black))
-
-                Column(
+                Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(8.dp),
-                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
 
-                    Text(
-                        text = recentRead.title,
-                        style = MaterialTheme.typography.h5,
-                        maxLines = 2
-                    )
-
-                    Text(
-                        modifier = Modifier.padding(vertical = 6.dp),
-                        text = "Your progress : 25%",
-                        style = MaterialTheme.typography.subtitle1.copy(
-                            fontSize = 20.sp
-                        ),
-                    )
-
-                    BrutalBox(
+                    Image(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(50.dp)
-                            .padding(bottom = 4.dp, end = 4.dp),
-                        backgroundColor = BrutalBlue,
-                        borderWidth = 3.dp,
-                        cornerRadius = 4.dp,
-                        shadowCornerRadius = 4.dp,
-                        contentAlignment = Alignment.Center
+                            .fillMaxHeight()
+                            .width(120.dp)
+                            .clip(
+                                shape = RoundedCornerShape(
+                                    topStart = 8.dp,
+                                    topEnd = 0.dp,
+                                    bottomStart = 8.dp,
+                                    bottomEnd = 0.dp
+                                )
+                            ),
+                        painter = painter,
+                        contentScale = ContentScale.Crop,
+                        contentDescription = "Continue Reading"
+                    )
+
+                    Divider(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .width(4.dp)
+                            .background(Color.Black)
+                    )
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(8.dp),
+                        verticalArrangement = Arrangement.SpaceBetween
                     ) {
+
                         Text(
-                            text = "Continue Reading",
-                            style = MaterialTheme.typography.h6
+                            text = recentRead.title,
+                            style = MaterialTheme.typography.h5,
+                            maxLines = 2
                         )
+                        Text(
+                            text = "By " + recentRead.author,
+                            style = MaterialTheme.typography.subtitle2,
+                            color = Color.Black.copy(alpha = 0.5f),
+                            maxLines = 2
+                        )
+
+                        BrutalBox(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(50.dp)
+                                .padding(bottom = 4.dp, end = 4.dp),
+                            backgroundColor = BrutalBlue,
+                            borderWidth = 3.dp,
+                            cornerRadius = 4.dp,
+                            shadowCornerRadius = 4.dp,
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxSize(),
+                                horizontalArrangement = Arrangement.SpaceAround,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "Continue Reading",
+                                    style = MaterialTheme.typography.subtitle1,
+                                    color = Color.White
+                                )
+                                CircularProgressBar(
+                                    percentage = 0.64f,
+                                    radius = 12.dp,
+                                    color = Color.White,
+                                    strokeWidth = 3.dp,
+                                )
+
+
+                            }
+
+                        }
+
                     }
 
                 }
 
+
             }
 
+            Text(
+                modifier = Modifier.padding(start = 12.dp, top = 8.dp, end = 12.dp),
+                text = "Recommended For You",
+                style = MaterialTheme.typography.h6,
+            )
 
-        }
-
-        Text(
-            modifier = Modifier.padding(start = 12.dp),
-            text = "Recommended For You",
-            style = MaterialTheme.typography.h6,
-        )
-
-        LazyRow(
-            contentPadding = PaddingValues(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            itemsIndexed(items = getScienceFictions()) { index, book ->
-                BookCard(index = index, book = book)
+            LazyRow(
+                contentPadding = PaddingValues(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                itemsIndexed(items = getScienceFictions()) { index, book ->
+                    BookCard(index = index, book = book)
+                }
             }
-        }
 
-        Text(
-            modifier = Modifier.padding(start = 12.dp),
-            text = "Best Sellers",
-            style = MaterialTheme.typography.h6,
-        )
-        LazyRow(
-            contentPadding = PaddingValues(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            itemsIndexed(items = getManagementBooks()) { index, book ->
-                BookCard(index = index, book = book)
+            Text(
+                modifier = Modifier.padding(start = 12.dp, top = 8.dp, end = 12.dp),
+                text = "Best Sellers",
+                style = MaterialTheme.typography.h6,
+            )
+            LazyRow(
+                contentPadding = PaddingValues(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                itemsIndexed(items = getManagementBooks()) { index, book ->
+                    BookCard(index = index, book = book)
+                }
             }
         }
 
@@ -257,8 +280,7 @@ fun SearchBox() {
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)
-            .padding(horizontal = 12.dp)
-            .offset(y = (-30).dp),
+            .padding(horizontal = 12.dp),
         backgroundColor = Color.White,
         borderColor = Color.Black,
         borderWidth = 4.dp,
