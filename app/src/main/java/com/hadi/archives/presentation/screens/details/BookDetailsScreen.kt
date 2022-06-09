@@ -10,7 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -19,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -27,6 +28,7 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.hadi.archives.R
+import com.hadi.archives.data.local.getAllBooks
 import com.hadi.archives.data.local.getManagementBooks
 import com.hadi.archives.data.model.Book
 import com.hadi.archives.ui.theme.BrutalBlue
@@ -40,14 +42,11 @@ fun BookDetailsScreen(
     bookId: String
 ) {
 
-    val context = LocalContext.current
-    Toast.makeText(context, bookId, Toast.LENGTH_SHORT).show()
-
     rememberSystemUiController().setStatusBarColor(Color.White)
 
     val scrollState = rememberScrollState()
 
-    val book = getManagementBooks()[0]
+    val book = getAllBooks().first { it.id == bookId }
 
     val painter = rememberImagePainter(data = book.imageUrl) {
         placeholder(R.drawable.ic_book_placeholder)
@@ -80,7 +79,10 @@ fun BookDetailsScreen(
                         .applyBrutalism(
                             backgroundColor = BrutalYellow,
                             borderWidth = 3.dp,
-                        ),
+                        )
+                        .clickable {
+                            navController.popBackStack()
+                        },
                     contentAlignment = Alignment.Center
                 ) {
 
@@ -101,7 +103,7 @@ fun BookDetailsScreen(
             Box(
                 modifier = Modifier
                     .width(250.dp)
-                    .height(340.dp)
+                    .height(360.dp)
                     .padding(all = 12.dp)
                     .applyBrutalism(
                         backgroundColor = BrutalYellow,
@@ -125,7 +127,8 @@ fun BookDetailsScreen(
                 modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 12.dp),
                 text = book.title,
                 style = MaterialTheme.typography.h4,
-                color = Color.Black
+                color = Color.Black,
+                textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -192,6 +195,11 @@ fun BookDetailsScreen(
 //Start Reading and Save Buttons
 @Composable
 fun PrimaryBookActions(modifier: Modifier = Modifier) {
+
+    var saveBook by remember {
+        mutableStateOf(false)
+    }
+
     Row(
         modifier = modifier
     ) {
@@ -205,7 +213,10 @@ fun PrimaryBookActions(modifier: Modifier = Modifier) {
                     backgroundColor = BrutalYellow,
                     borderWidth = 3.dp,
 
-                    ),
+                    )
+                .clickable {
+                    saveBook = !saveBook
+                },
             contentAlignment = Alignment.Center
         ) {
 
@@ -214,7 +225,7 @@ fun PrimaryBookActions(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .size(36.dp)
                     .padding(all = 6.dp),
-                painter = painterResource(id = R.drawable.ic_bookmark),
+                painter = painterResource(id = if (saveBook) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined),
                 contentDescription = "Notifications"
             )
 

@@ -11,11 +11,3 @@ data class Slider(
 
 
 
-object SliderData {
-    val slides = listOf<Slider>(
-        Slider(R.drawable.slide_1,"Sleep is good, he said, and books are better.","George R.R. Martin"),
-        Slider(R.drawable.slide_3,"Books are uniquely portable magic.","Walt Disney"),
-        Slider(R.drawable.slide_2,"There is no friend as loyal as a book.","Stephen King"),
-    )
-}
-

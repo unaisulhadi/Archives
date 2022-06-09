@@ -28,11 +28,10 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.hadi.archives.data.local.SliderData
 import com.hadi.archives.data.model.Slider
-import com.hadi.archives.data.model.SliderData
-import com.hadi.archives.presentation.components.BrutalBox
 import com.hadi.archives.presentation.navigation.Screen
-import com.hadi.archives.ui.theme.BrutalBlue
+import com.hadi.archives.ui.theme.BrutalCyan
 import com.hadi.archives.ui.theme.BrutalYellow
 import com.hadi.archives.utils.applyBrutalism
 
@@ -157,7 +156,7 @@ fun Slider(slide: Slider) {
                 .height(400.dp)
                 .padding(32.dp)
                 .applyBrutalism(
-                    backgroundColor = BrutalYellow,
+                    backgroundColor = BrutalCyan,
                     borderWidth = 3.dp
                 ),
             contentAlignment = Alignment.Center

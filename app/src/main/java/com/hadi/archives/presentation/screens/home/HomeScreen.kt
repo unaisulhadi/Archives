@@ -176,6 +176,11 @@ fun HomeScreen(
                                     backgroundColor = BrutalBlue,
                                     borderWidth = 3.dp
                                 )
+                                .clickable {
+                                    navController.navigate(
+                                        route = Screen.Details.route.plus("/${recentRead.id}")
+                                    )
+                                }
                         ) {
                             Row(
                                 modifier = Modifier.fillMaxSize(),
@@ -216,7 +221,7 @@ fun HomeScreen(
                 contentPadding = PaddingValues(8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                itemsIndexed(items = getScienceFictions()) { index, book ->
+                itemsIndexed(items = getManagementBooks()) { index, book ->
                     BookCard(book = book) {
                         navController.navigate(
                             route = Screen.Details.route.plus("/${book.id}")
@@ -230,16 +235,20 @@ fun HomeScreen(
                 text = "Best Sellers",
                 style = MaterialTheme.typography.h6,
             )
+
             LazyRow(
                 contentPadding = PaddingValues(8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                itemsIndexed(items = getManagementBooks()) { index, book ->
+                itemsIndexed(items = getScienceFictions()) { index, book ->
                     BookCard(book = book) {
-                        navController.navigate(Screen.Details.route)
+                        navController.navigate(
+                            route = Screen.Details.route.plus("/${book.id}")
+                        )
                     }
                 }
             }
+
         }
 
     }

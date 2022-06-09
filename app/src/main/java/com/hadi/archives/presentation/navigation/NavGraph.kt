@@ -13,7 +13,7 @@ import com.hadi.archives.presentation.screens.welcome.WelcomeScreen
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = Screen.Welcome.route
     ) {
 
         composable(route = Screen.Splash.route){
